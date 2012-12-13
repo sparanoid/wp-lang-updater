@@ -41,8 +41,6 @@ find . -name "*zh_CN.po" -exec sed -i "" 's/Last-Translator: Jiehan Zheng <zheng
 find . -name "*zh_CN.po" -exec sed -i "" 's/Language-Team: WordPress China <wpchina@jiehan.org>/Language-Team: Postholic WordPress Dev Team <wp@postholic.com>/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/"%1$s%2$s"/"%1$s @ %2$s"/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/中文支持论坛/支持论坛/' '{}' \;
-find . -name "*zh_CN.po" -exec sed -i "" 's/zh-cn.forums.wordpress.org\/forum\/suggestions/wordpress.org\/wordpress.org\/support\/forum\/requests-and-feedback/' '{}' \;
-find . -name "*zh_CN.po" -exec sed -i "" 's/zh-cn.forums.wordpress.org\//wordpress.org\/support\//' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/自豪地采用 %s/由 %s 驱动/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/链向 %s 的固定链接/「%s」的永久链接/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/cn.wordpress.org/wordpress.org/' '{}' \;
@@ -54,10 +52,13 @@ find . -name "*zh_CN.po" -exec sed -i "" 's/博客/网志/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/分类目录/分类/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/小工具/小挂件/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/引语/引用/' '{}' \;
+find . -name "*zh_CN.po" -exec sed -i "" 's/特性筛选/特征筛选/' '{}' \;
+find . -name "*zh_CN.po" -exec sed -i "" 's/设为特色图像/设置特色图像/' '{}' \;
+find . -name "*zh_CN.po" -exec sed -i "" 's/插入多媒体/插入媒体/' '{}' \;
+find . -name "*zh_CN.po" -exec sed -i "" 's/拖文件到任何地方来上传/拖文件至任意位置上传/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/“/「/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/”/」/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/《/「/' '{}' \;
 find . -name "*zh_CN.po" -exec sed -i "" 's/》/」/' '{}' \;
-find . -name "*zh_CN.po" -exec sed -i "" 's/特性筛选/特征筛选/' '{}' \;
 for file in `find . -name "*zh_CN.po"` ; do msgfmt -o `echo $file | sed s/\.po/\.mo/` $file ; done
 
