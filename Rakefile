@@ -126,6 +126,7 @@ end
 # Clean task
 desc 'Clean up cache files in temporary directory'
 task :clean do
-  system ""
+  system "rm -rf #{wp_tmp}/cn/"
+  system "rm -rf #{wp_tmp}/ja/"
   puts "Cleaning file cache                                  Done"
 end
