@@ -5,7 +5,7 @@
 # http://dreamcolor.net/project/wordpress-chinese-translation/
 
 # Speicify current WordpRess version
-wp_ver       = '3.5'
+wp_ver       = '3.5.1'
 
 # localhost directory
 wp_local     = '~/dropbox/sparanoid-web/\~localhost/\~/wp-content'
@@ -17,10 +17,10 @@ wp_tmp       = '~/dropbox/sparanoid-web/postholic.com/\~wp-tmp'
 local_static = '~/dropbox/sparanoid-web/static.sparanoid.com'
 
 # Rakefile frome sparanoid.com to sync local static files to Amazon S3
-s3_rake      = '~/dropbox/sparanoid-web/~git/sparanoid.com/Rakefile'
+s3_rake      = '~/dropbox/sparanoid-code/sparanoid.com/Rakefile'
 
 # Lab directory for updating themes .json files
-lab_static   = '~/dropbox/sparanoid-web//sparanoid.com/'
+lab_static   = '~/dropbox/sparanoid-web/sparanoid.com/'
 
 # Server settings
 ssh_user     = 'root@postholic.com'
@@ -42,7 +42,7 @@ wp_exclude   = '--exclude=.*'
 # -o  overwrite files WITHOUT prompting
 
 # Default task
-desc 'Update Geting Twenty Eleven theme language files to locallocal files'
+desc 'Download and update language files to localhost'
 task :default => [:download, :update, :translate] do
   puts "Task completed"
 end
@@ -76,10 +76,10 @@ end
 
 # Translate task
 # - Re-translate incorrect and ridiculous translations made by Chinese official WordPress translation team
-desc 'Translate stupid offical strings'
+desc 'Translate stupid official strings'
 task :translate do
   system "sh ./wp-translate.sh"
-  puts "Translating bad offical strings                      Done"
+  puts "Translating bad official strings                     Done"
 end
 
 # Language files deploy task
@@ -126,7 +126,9 @@ end
 # Clean task
 desc 'Clean up cache files in temporary directory'
 task :clean do
-  system "rm -rf #{wp_tmp}/cn/"
-  system "rm -rf #{wp_tmp}/ja/"
+  system "mkdir #{wp_tmp}/_todelete"
+  system "mv * #{wp_tmp}/_todelete"
+  system "mv #{wp_tmp}/_todelete/wordpress-#{wp_ver}-zh_CN.zip #{wp_tmp}/_todelete/wordpress-#{wp_ver}-ja.zip #{wp_tmp}/"
+  system "rm -rf #{wp_tmp}/_todelete/"
   puts "Cleaning file cache                                  Done"
 end
