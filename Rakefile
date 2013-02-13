@@ -127,8 +127,8 @@ end
 desc 'Clean up cache files in temporary directory'
 task :clean do
   system "mkdir #{wp_tmp}/_todelete"
-  system "mv * #{wp_tmp}/_todelete"
-  system "mv #{wp_tmp}/_todelete/wordpress-#{wp_ver}-zh_CN.zip #{wp_tmp}/_todelete/wordpress-#{wp_ver}-ja.zip #{wp_tmp}/"
+  system "mv -f #{wp_tmp}/* #{wp_tmp}/_todelete"
+  system "mv -f #{wp_tmp}/_todelete/wordpress-#{wp_ver}-zh_CN.zip #{wp_tmp}/_todelete/wordpress-#{wp_ver}-ja.zip #{wp_tmp}/"
   system "rm -rf #{wp_tmp}/_todelete/"
   puts "Cleaning file cache                                  Done"
 end
