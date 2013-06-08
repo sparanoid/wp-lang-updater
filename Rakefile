@@ -8,19 +8,16 @@
 wp_ver       = '3.5.1'
 
 # localhost directory
-wp_local     = '~/dropbox/sparanoid-web/\~localhost/\~/wp-content'
+wp_local     = '~/Dropbox/Sites/localhost/\~/wp-content'
 
 # Temporary files directory
-wp_tmp       = '~/dropbox/sparanoid-web/postholic.com/\~wp-tmp'
+wp_tmp       = '~/Dropbox/Sites/postholic.com/\~wp-tmp'
 
 # Local static files directory for storing theme zipballs for downloading
-local_static = '~/dropbox/sparanoid-web/static.sparanoid.com'
-
-# Rakefile frome sparanoid.com to sync local static files to Amazon S3
-s3_rake      = '~/dropbox/sparanoid-code/sparanoid.com/Rakefile'
+local_static = '~/Dropbox/Sites/static.sparanoid.com'
 
 # Lab directory for updating themes .json files
-lab_static   = '~/dropbox/sparanoid-web/sparanoid.com/'
+lab_static   = '~/Dropbox/Sites/sparanoid.com/'
 
 # Server settings
 ssh_user     = 'root@postholic.com'
@@ -91,34 +88,42 @@ end
 
 # Kai series themes deploy task
 # - Upload custom themes (Kai series) files to server
-task :theme => [:t12k, :t11k, :t10k] do
+task :theme => [:k12, :k11, :k10] do
   puts "Deploying Kai series themes completed"
-  system "rake --rakefile #{s3_rake} s3"
+  system "grunt s3"
   puts "Tagging new versions and uploading to Amazon S3 completed"
   system "make -C #{lab_static}"
   puts "Bumping new versions to make theme updatable completed"
 end
 
-task :t12k do
-  theme = 'twentytwelve-kai'
-  system "rsync -avz --delete #{wp_exclude} #{wp_local}/themes/twentytwelve-kai/ #{ssh_user}:#{remote_root}/themes/twentytwelve-kai/"
-  puts "Uploading Twenty Twelve Kai to server                Done"
+task :k13 do
+  theme = 'kai-13'
+  system "rsync -avz --delete #{wp_exclude} #{wp_local}/themes/#{theme}/ #{ssh_user}:#{remote_root}/themes/#{theme}/"
+  puts "Uploading Kai 13 to server                           Done"
   system "git --work-tree #{wp_local}/themes/#{theme}/ --git-dir #{wp_local}/themes/#{theme}/.git archive --format=zip --prefix=#{theme}/ -o #{local_static}/download/#{theme}.zip HEAD"
   puts "Creating zipball to static.sparanoid.com             Done"
 end
 
-task :t11k do
-  theme = 'twentyeleven-kai'
-  system "rsync -avz --delete #{wp_exclude} #{wp_local}/themes/twentyeleven-kai/ #{ssh_user}:#{remote_root}/themes/twentyeleven-kai/"
-  puts "Uploading Twenty Eleven Kai to server                Done"
+task :k12 do
+  theme = 'kai-12'
+  system "rsync -avz --delete #{wp_exclude} #{wp_local}/themes/#{theme}/ #{ssh_user}:#{remote_root}/themes/#{theme}/"
+  puts "Uploading Kai 12 to server                           Done"
   system "git --work-tree #{wp_local}/themes/#{theme}/ --git-dir #{wp_local}/themes/#{theme}/.git archive --format=zip --prefix=#{theme}/ -o #{local_static}/download/#{theme}.zip HEAD"
   puts "Creating zipball to static.sparanoid.com             Done"
 end
 
-task :t10k do
-  theme = 'twentyten-kai'
-  system "rsync -avz --delete #{wp_exclude} #{wp_local}/themes/twentyten-kai/ #{ssh_user}:#{remote_root}/themes/twentyten-kai/"
-  puts "Uploading Twenty Ten Kai to server                   Done"
+task :k11 do
+  theme = 'kai-11'
+  system "rsync -avz --delete #{wp_exclude} #{wp_local}/themes/#{theme}/ #{ssh_user}:#{remote_root}/themes/#{theme}/"
+  puts "Uploading Kai 11 to server                           Done"
+  system "git --work-tree #{wp_local}/themes/#{theme}/ --git-dir #{wp_local}/themes/#{theme}/.git archive --format=zip --prefix=#{theme}/ -o #{local_static}/download/#{theme}.zip HEAD"
+  puts "Creating zipball to static.sparanoid.com             Done"
+end
+
+task :k10 do
+  theme = 'kai-10'
+  system "rsync -avz --delete #{wp_exclude} #{wp_local}/themes/#{theme}/ #{ssh_user}:#{remote_root}/themes/#{theme}/"
+  puts "Uploading Kai 10 to server                           Done"
   system "git --work-tree #{wp_local}/themes/#{theme}/ --git-dir #{wp_local}/themes/#{theme}/.git archive --format=zip --prefix=#{theme}/ -o #{local_static}/download/#{theme}.zip HEAD"
   puts "Creating zipball to static.sparanoid.com             Done"
 end
