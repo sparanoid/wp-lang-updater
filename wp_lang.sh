@@ -10,8 +10,8 @@ WP_DIST=/srv/www/postholic.com/public_html/wp-content
 
 # Download original translated packages
 echo " - Downloading WordPress packages..."
-wget -qN http://cn.wordpress.org/wordpress-$WP_VER-zh_CN.zip -P $WP_TMP/ -o $WP_TMP/wordpress-$WP_VER-zh_CN.log
-wget -qN http://ja.wordpress.org/wordpress-$WP_VER-ja.zip -P $WP_TMP/ -o $WP_TMP/wordpress-$WP_VER-ja.log
+wget -qN http://cn.wordpress.org/wordpress-$WP_VER-zh_CN.zip -P $WP_TMP/ -a $WP_TMP/wget.log -d
+wget -qN http://ja.wordpress.org/wordpress-$WP_VER-ja.zip -P $WP_TMP/ -a $WP_TMP/wget.log -d
 
 # Unpack
 echo " - Unpacking zipball..."
@@ -27,6 +27,7 @@ rm -rf $WP_TMP/cn/wordpress/wp-content/languages/zh_CN*.php
 # Re-translate original language files
 # You need to have gettext installed on your server in order to use msgfmt
 # Useful command: cat zh_CN.po | grep '自豪'
+# Theme specified strings come first, then replace all common strings using *zh_CN.po mask
 echo " - Re-translating original language files..."
 
 # Twenty Twelve
@@ -56,7 +57,7 @@ echo "   - Re-translating Twenty Ten..."
 cd $WP_TMP/cn/wordpress/wp-content/languages/themes/
 for file in `find . -name "twentyten-zh_CN.po"` ; do msgfmt -o `echo $file | sed s/\.po/\.mo/` $file ; done
 
-# Core language files and themes common strings translation, based on Twenty Ten.
+# Core language files and all other common translations for themes, based on Twenty Ten.
 echo "   - Re-translating core language files..."
 cd $WP_TMP/cn/wordpress/wp-content/languages/
 sed -i 's/Last-Translator: Jimmy Xu <me@jimmyxu.org>/Last-Translator: Tunghsiao Liu <t@postholic.com>/g' *zh_CN.po
@@ -84,9 +85,14 @@ sed -i 's/《/「/g' *zh_CN.po
 sed -i 's/》/」/g' *zh_CN.po
 for file in `find . -name "*zh_CN.po"` ; do msgfmt -o `echo $file | sed s/\.po/\.mo/` $file ; done
 
-# Copy re-translated files to prod. site
+# Copy re-translated files
 echo " - Copying re-translated files to prod. site..."
 cp -R $WP_TMP/cn/wordpress/wp-content/languages/ $WP_DIST/
 cp -R $WP_TMP/ja/wordpress/wp-content/languages/ $WP_DIST/
+
+# Cleanup
+echo " - Cleaning up temporary files..."
+rm -rf $WP_TMP/cn/
+rm -rf $WP_TMP/ja/
 
 echo " - Done."
