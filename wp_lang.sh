@@ -10,8 +10,8 @@ WP_DIST=/srv/www/postholic.com/public_html/wp-content
 
 # Download original translated packages
 echo " - Downloading WordPress packages..."
-wget -N http://cn.wordpress.org/wordpress-$WP_VER-zh_CN.zip -P $WP_TMP/
-wget -N http://ja.wordpress.org/wordpress-$WP_VER-ja.zip -P $WP_TMP/
+wget -qN http://cn.wordpress.org/wordpress-$WP_VER-zh_CN.zip -P $WP_TMP/ -o $WP_TMP/wordpress-$WP_VER-zh_CN.log
+wget -qN http://ja.wordpress.org/wordpress-$WP_VER-ja.zip -P $WP_TMP/ -o $WP_TMP/wordpress-$WP_VER-ja.log
 
 # Unpack
 echo " - Unpacking zipball..."
