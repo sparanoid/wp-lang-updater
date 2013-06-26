@@ -3,8 +3,6 @@
 
 # Variables
 WP_VER=3.5.2
-# WP_VER=tags/3.5/messages
-# WP_VER=trunk/messages
 WP_REMOTE=http://i18n.svn.wordpress.org
 WP_EXCLUDE=--exclude=.*
 WP_TMP=/tmp/wp-lang
@@ -28,9 +26,7 @@ rm -rf $WP_TMP/cn/wordpress/wp-content/languages/zh_CN*.php
 
 # Re-translate original language files
 # You need to have gettext installed on your server in order to use msgfmt
-# 用于中文翻译维护:
-# cat zh_CN.po | grep '自豪'
-
+# Useful command: cat zh_CN.po | grep '自豪'
 echo " - Re-translating original language files..."
 
 # Twenty Twelve
