@@ -1,6 +1,10 @@
 #!/bin/bash
 # Wordpress Maintenance Script by Tunghsiao Liu
 
+# Please check the wordpress download page and ensure to use the latest version
+# http://ja.wordpress.org/
+# http://cn.wordpress.org/
+
 # Variables
 WP_VER=3.5.2
 WP_REMOTE=http://i18n.svn.wordpress.org
