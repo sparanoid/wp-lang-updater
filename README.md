@@ -5,7 +5,7 @@
 Paste the following code at a Terminal prompt:
 
 ```shell
-bash <(curl -fsSL https://raw.github.com/postholic/wp-lang-updater/master/go)
+bash <(curl -fsSL https://raw.github.com/nio2/wp-lang-updater/master/go)
 ```
 
 ## Author
