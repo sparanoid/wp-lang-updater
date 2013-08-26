@@ -64,8 +64,8 @@ for file in `find . -name "twentyten-zh_CN.po"` ; do msgfmt -o `echo $file | sed
 # Core language files and all other common translations for themes, based on Twenty Ten.
 echo "   - Re-translating core language files..."
 cd $WP_TMP/cn/wordpress/wp-content/languages/
-sed -i 's/Last-Translator: Jimmy Xu <me@jimmyxu.org>/Last-Translator: Tunghsiao Liu <t@postholic.com>/g' *zh_CN.po
-sed -i 's/Language-Team: WordPress China/Language-Team: WordPress China and Postholic Dev Team/g' *zh_CN.po
+sed -i 's/Last-Translator: Jimmy Xu <me@jimmyxu.org>/Last-Translator: Tunghsiao Liu <t@sparanoid.com>/g' *zh_CN.po
+sed -i 's/Language-Team: WordPress China/Language-Team: WordPress China and Postholic (aka. nio2) Dev Team/g' *zh_CN.po
 sed -i 's/"%1$s%2$s"/"%1$s @ %2$s"/g' *zh_CN.po
 sed -i 's/中文支持论坛/支持论坛/g' *zh_CN.po
 sed -i 's/自豪地采用 %s/由 %s 驱动/g' *zh_CN.po
